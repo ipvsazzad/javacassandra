@@ -1,7 +1,4 @@
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Session;
+import com.datastax.driver.core.*;
 
 /**
  * Created by Sazzad on 08-Feb-15.
@@ -16,6 +13,8 @@ public class CassandraConnector {
 
     public static void main(String[] args) {
         cluster = connect("localhost");
+        cluster.getConfiguration().getPoolingOptions().setMaxConnectionsPerHost(HostDistance.LOCAL,100);
+
 
 
 
