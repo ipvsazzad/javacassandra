@@ -16,17 +16,23 @@ public class CassandraConnector {
         cluster.getConfiguration().getPoolingOptions().setMaxConnectionsPerHost(HostDistance.LOCAL,100);
 
 
-
-
-
-
-        //getAllFromTable("myks", "users");
+        //createTable("myks");
+        getAllFromTable("myks", "users");
         //createDatabase("db2");
         //insertDataToTable("myks", "users");
         //updateTable("myks", "users");
-        deleteDataFromTable("myks", "users");
+        //deleteDataFromTable("myks", "users");
 
 
+    }
+
+    private static void createTable(String databaseName) {
+        String createTableQuery = "CREATE TABLE users_3 ("
+                +"user_id int PRIMARY KEY,"
+                +"fname varchar,"
+                +"lname varchar);";
+        session = cluster.connect(databaseName);
+        session.execute(createTableQuery);
     }
 
     private static void createDatabase(String databaseName) {
