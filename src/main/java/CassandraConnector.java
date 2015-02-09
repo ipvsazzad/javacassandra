@@ -24,6 +24,8 @@ public class CassandraConnector {
         //getAllFromTable("myks", "users");
         //createDatabase("db2");
         //insertDataToTable("myks", "users");
+        //updateTable("myks", "users");
+        deleteDataFromTable("myks", "users");
 
 
     }
@@ -51,6 +53,22 @@ public class CassandraConnector {
     private static void insertDataToTable(String databaseName, String tableName){
         session = cluster.connect(databaseName);
         session.execute("INSERT INTO "+tableName+" (user_id,  fname, lname) VALUES (9945, 'sazzad', 'Islam');");
+
+        session.close();
+        cluster.close();
+    }
+
+    private static void updateTable(String databaseName, String tableName){
+        session = cluster.connect(databaseName);
+        session.execute("update "+tableName+" set fname='md sazzad' where user_id=9945;");
+
+        session.close();
+        cluster.close();
+    }
+
+    private static void deleteDataFromTable(String databaseName, String tableName){
+        session = cluster.connect(databaseName);
+        session.execute("delete from "+tableName+" where user_id=1745;");
 
         session.close();
         cluster.close();
